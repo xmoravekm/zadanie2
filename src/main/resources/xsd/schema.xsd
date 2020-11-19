@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="users"
+           xmlns:tns="users"
+           version="1.1.0">
+
+    <xs:element name="users">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="tns:user" name="user" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="user">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="surname" type="xs:string"/>
+            <xs:element name="identification_number" type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="permanent_address" type="tns:address"/>
+            <xs:element name="address_for_correspondence" type="tns:address" minOccurs="0"/>
+            <xs:element name="list_insurance" type="tns:insurance" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="address">
+        <xs:sequence>
+            <xs:element name="psc" type="xs:integer"/>
+            <xs:element name="name_city" type="xs:string"/>
+            <xs:element name="name_street" type="xs:string"/>
+            <xs:element name="number_house" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="insurances">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="tns:insurance" name="insurance" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="insurance">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="created" type="xs:date"/>
+            <xs:element name="value" type="xs:double"/>
+            <xs:element name="monthly" type="xs:double"/>
+            <xs:element name="start_date" type="xs:date"/>
+            <xs:element name="end_date" type="xs:date"/>
+            <xs:element name="id_person" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="travel_insurance">
+        <xs:complexContent>
+            <xs:extension base="tns:insurance">
+                <xs:sequence>
+                    <xs:element name="insured" type="tns:user"/>
+                    <xs:element name="validity" type="xs:boolean" minOccurs="0"/>
+                    <xs:element name="purpose" type="tns:insurance_purpose" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="injury_insurance">
+        <xs:complexContent>
+            <xs:extension base="tns:insurance">
+                <xs:sequence>
+                    <xs:element name="insured" type="tns:user"/>
+                    <xs:element name="permanent" type="xs:double"/>
+                    <xs:element name="death_value" type="xs:double"/>
+                    <xs:element name="daily_value" type="xs:double"/>
+                    <xs:element name="territorial_validity" type="tns:insurance_territorial_validity" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="house_insurance">
+        <xs:complexContent>
+            <xs:extension base="tns:insurance">
+                <xs:sequence>
+                    <xs:element name="address" type="tns:address"/>
+                    <xs:element name="property_value" type="xs:double"/>
+                    <xs:element name="house_value" type="xs:double"/>
+                    <xs:element name="property_type" type="tns:insurance_property_type" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="house_and_property_insurance">
+        <xs:complexContent>
+            <xs:extension base="tns:insurance">
+                <xs:sequence>
+                    <xs:element name="address" type="tns:address"/>
+                    <xs:element name="property_value" type="xs:double"/>
+                    <xs:element name="garage_insurance" type="xs:boolean"/>
+                    <xs:element name="property_type" type="tns:insurance_property_type" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:simpleType name="insurance_purpose">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="pracovne"/>
+            <xs:enumeration value="rekreacne"/>
+            <xs:enumeration value="sport"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="insurance_territorial_validity">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Slovensko"/>
+            <xs:enumeration value="Svet"/>
+            <xs:enumeration value="Slovensko+Svet"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="insurance_property_type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="rodinny dom"/>
+            <xs:enumeration value="byt"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+</xs:schema>
