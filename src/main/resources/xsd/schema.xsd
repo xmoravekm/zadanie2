@@ -1,9 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema elementFormDefault="qualified"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="users"
-           xmlns:tns="users"
+           targetNamespace="schema"
+           xmlns:tns="schema"
            version="1.1.0">
+
+    <xs:element name="listOfUsers">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="tns:user" name="userElement" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addUserInput" type="tns:user"/>
+    <xs:element name="addUserOutput" type="tns:user"/>
+    <xs:element name="updateUserInput" type="tns:user"/>
+    <xs:element name="updateUserOutput" type="tns:user"/>
+    <xs:element name="getOneUserInput" type="xs:long"/>
+    <xs:element name="getOneUserOutput" type="tns:user"/>
+
+    <xs:element name="insuranceResponseList">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="tns:insurance" name="userElement" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createInsuranceRequest" type="tns:insurance"/>
+    <xs:element name="createInsuranceResponse" type="tns:insurance"/>
+    <xs:element name="updateInsuranceRequest" type="tns:insurance"/>
+    <xs:element name="updateInsuranceResponse" type="tns:insurance"/>
+    <xs:element name="getByUserIdRequest" type="xs:long"/>
+    <xs:element name="getByUserIdResponse" type="tns:insurance"/>
 
     <xs:element name="users">
         <xs:complexType>
@@ -15,7 +45,7 @@
 
     <xs:complexType name="user">
         <xs:sequence>
-            <xs:element name="id" type="xs:long"/>
+            <xs:element name="id" type="xs:long" minOccurs="0"/>
             <xs:element name="name" type="xs:string"/>
             <xs:element name="surname" type="xs:string"/>
             <xs:element name="identification_number" type="xs:string"/>

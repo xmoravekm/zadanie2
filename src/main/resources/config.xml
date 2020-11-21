@@ -3,5 +3,14 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
     <bean name="userService" class="sk.stuba.fei.uim.asos.assignment2.user.service.UserService"/>
+    <bean name="insuranceService" class="sk.stuba.fei.uim.asos.assignment2.insurance.service.InsuranceService"/>
+
+    <bean name="userEndpoint" class="sk.stuba.fei.uim.asos.assignment2.UserEndpoint">
+        <constructor-arg name="userService" ref="userService"/>
+    </bean>
+
+    <bean name="InsuranceEndpoint" class="sk.stuba.fei.uim.asos.assignment2.InsuranceEndpoint">
+        <constructor-arg name="insuranceService" ref="insuranceService"/>
+    </bean>
 
 </beans>

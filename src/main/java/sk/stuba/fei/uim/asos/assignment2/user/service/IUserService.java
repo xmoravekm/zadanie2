@@ -1,7 +1,5 @@
 package sk.stuba.fei.uim.asos.assignment2.user.service;
 
-import sk.stuba.fei.uim.asos.assignment2.user.domain.AbstractUser;
-
 import java.util.List;
 
 /**
@@ -10,7 +8,7 @@ import java.util.List;
  * @param <T> Trieda používateľa
  * @param <I> Trieda identifikátora používateľa
  */
-public interface IUserService<T extends AbstractUser, I> {
+public interface IUserService<T, I> {
 
     T add(T user);
 
